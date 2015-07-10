@@ -2,23 +2,36 @@ int x, y, a, b, c, d;
 int[] fx = new int[1000], fy = new int [1000];
 int top = 0;
 int e = 0;
+int time = 60000;
+int s = 0;
 void setup() 
 {
   size (500,500);
   background(255);
+  s = millis(); 
 }
  int count = 0;
 void draw()
-{
+{  
+
    fill(255);
    rect(350,0,150,100);
-   textSize(64);
+   textSize(40);
    fill(0);
-   text(e,360,80);
+   
+   
+   String timeString = (60 - (millis() - s) / 1000) + "S";
+   int p = (60 - (millis() - s) / 1000);
+   
+   text(e + "\n" + timeString,360,30);
    noStroke();
-    fill(255);
-    ellipse(x,y,24,24);
-    stroke(1);
+   fill(255);
+   ellipse(x,y,24,24);
+   stroke(1);
+    
+
+    
+    
   if ((key == 'd') && (keyPressed))
   {
     x+= 3;
@@ -47,8 +60,11 @@ void draw()
   if(y > 520){
     y = -20;
   }
+  if( p < 0){
+    x = 0; y = 0;
+  }
   for(int i = 0; i < top; i++){
-   if(dist(fx[i],fy[i],x,y)<10){
+   if(dist(fx[i],fy[i],x,y)<15){
      int t = fx[i]; 
      fx[i] = fx[top-1];
      fx[top-1] = fx[i];
@@ -72,4 +88,6 @@ void draw()
    fy[top] = d;
    top++;
   }
+   fill(0);
+
 }
